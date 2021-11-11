@@ -1,9 +1,17 @@
-# Tell me a few words I will tell you who you are
-# Tell me who you are and I will tell you how you speak
+# Tell me a few words and I will tell you who you are
 
 ## Abstract
 
+Don't you ever read an article or a book and just wonder what the writer would look like? With the emergence of big data, relationships between the structure of a text and the writer/speaker's attributes can be extracted.
+
+Given the large number of quotations available and their associated speaker, one could explore the correlation between lexical features in speech and the speaker's attributes. Such an analysis would allow us to understand if their is any relationship between the socio-cultural status of an individual and the structure of his speech. The analysis can also be performed temporarily from 2008 to 2020 and reveal information concerning the evolution of particular trends over time. The analysis would allow us to cluster speakers that share similarities in both "lexical features" and "speaker attributes" and extract patterns. This could potentially help people estimate the attributes of a writer/speaker such as his/her ethnicity, educational background, gender, age ...
+
 ## Research questions
+How does your socio-cultural background affect the way you speak? 
+
+Does your nationality, gender, educational background or religion condemn you to talk in a specific way? 
+
+If so, can an algorithm predict who you are given a set of words you uttered?
 
 ## Datasets
 * Quotebank data with unique quotes 2015-2020
@@ -17,17 +25,16 @@ Large compressed files (such as processed Quotebank data) are stored in the Goog
 
 ## Methods
 ### Preprocessing
-The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the compressed JSON files provided.
-Since we are interested in the way people speak, we use the data with unique quotes and do the following:
- * Remove the following columns ['urls', 'phase', 'date', 'numOccurences']
+The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the JSON files.
+Since we are interested in the way people speak, we do the following:
+ * Remove the following columns ['urls','phase','date','numOccurences']
  * Remove quotes with no speakers
  * Remove quotes with multiple associated QIDs
-     * Multiple QIDs implies that there are two speakers with the same name and since we cannot know which person spoke the quote without further investigation, we remove these rows
- * Store the probability that the speaker spoke the quote and remove the other entires in ['probas']
+  * Multiple QIDs implies that there are two speakers with the same name. Since we cannot know which person spoke the quote without further investigation, we remove these rows.
+ * Store the probability of the most likely speaker only
 
 The resulting data is stored as a .bz2 file. The JSON file has the following keys:
 ['quoteID','quotation','speaker','prob','qid']
-
 
 ### Processing
 
