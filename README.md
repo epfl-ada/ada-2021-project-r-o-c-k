@@ -42,15 +42,17 @@ The resulting data is stored as a .bz2 file. The JSON file has the following key
 `exploring_quotes.ipynb`
 We also need to extract the information of the speakers. We first read all the parquet files into a dataframe. We check the composition of the data, as shown below:
 
+![Screenshot](images/speaker_data_composition.png)
+
 To reduce the overall of the dataset we need to handle, we remove the speaker information columns that we are not interested in. Thus, we removed the columns `[‘aliases’, ‘lastrevid’, ‘US_congress_bio_ID’, ‘label’, ‘candidacy’, ‘type’]`. We can then merge the preprocessed quotebank data with the speaker data. Since there are around 9 million unique speakers, quotes with speakers that are not in the speakers Wikidata provided are removed in this process. We checked that the quotes removed are a small fraction of all the preprocessed quotes (< 1%).
 
-### Processing
+### Feature extraction
 
 With the cleaned data at hand we are now ready to extract from it relevant features. Since we are more interested in the structure of the quotations or the “lexical features” and how it relates to the speaker. We have decided to process the data as follows:
 
 Lexical Features: A processed dataframe called lexical would have the following keys:
 
-[‘quoteID’,  ‘self_pronouns’, ‘union_pronouns’, ‘other_pronouns’, ‘sentiment_rate’, ‘comparative_rate’, ‘verb_tense’] 
+`[‘quoteID’,  ‘self_pronouns’, ‘union_pronouns’, ‘other_pronouns’, ‘sentiment_rate’, ‘comparative_rate’, ‘verb_tense’]`
 
 The meaning of each column is described below:
 * QuoteID : The identification number of the quotation
@@ -65,7 +67,7 @@ The meaning of each column is described below:
 
 Speaker Features: Speaker features are extracted from the Wikidata. The dataframe would include the following keys:
 
-[‘quoteID’,  ‘gender’, ‘nationality’, ‘religion’, ‘educational_level’, ‘birth_date’’]
+`[‘quoteID’,  ‘gender’, ‘nationality’, ‘religion’, ‘educational_level’, ‘birth_date’]`
 
 Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the datapoints into a 3D or 2D space.  Patterns can then be extracted using unsupervised clustering techniques which would generate groups of datapoints which share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
 
