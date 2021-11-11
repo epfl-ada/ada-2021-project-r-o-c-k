@@ -18,7 +18,7 @@ Given the large number of quotations available and their associated speaker, one
 
 ### Data management
 We use Google Collab to load and preprocess the raw Quotebank data because the dataset is very large. 
-We access each line of the .bz2 and .parquet files using the methods provided in the examples.
+We access each line of the bz2 and parquet files using the methods provided in the examples.
 Large compressed files (such as processed Quotebank data) are stored in the Google Drive. The .parquet files are also stored there for easy access.
 
 
@@ -37,6 +37,8 @@ Since we are interested in the way people speak, we do the following:
 
 The resulting data is stored as a .bz2 file. The JSON file has the following keys:
 `['quoteID','quotation','speaker','prob','qid']`
+
+We checked that Quotebank identified a speaker for 65-66% of its quotes. After removing the quotes with non-unique speakers, we retain 46-48% of the original quotes, which totals to approximately 53.7 million quotations. 
 
 #### Speaker data
 `exploring_quotes.ipynb`
