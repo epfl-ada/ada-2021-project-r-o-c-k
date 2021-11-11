@@ -27,6 +27,7 @@ Large compressed files (such as processed Quotebank data) are stored in the Goog
 ### Preprocessing
 #### Quotebank data 
 `preprocessing_notebook.ipynb`
+
 The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the JSON files.
 Since we are interested in the way people speak, we do the following:
  * Remove the following columns `['urls','phase','date','numOccurences']`
@@ -40,6 +41,7 @@ The resulting data is stored as a .bz2 file. The JSON file has the following key
 
 #### Speaker data
 `exploring_quotes.ipynb`
+
 We also need to extract the information of the speakers. We first read all the parquet files into a dataframe. We check the composition of the data, as shown below:
 
 ![Screenshot](images/speaker_data_composition.JPG)
@@ -47,6 +49,7 @@ We also need to extract the information of the speakers. We first read all the p
 To reduce the overall of the dataset we need to handle, we remove the speaker information columns that we are not interested in. Thus, we removed the columns `[‘aliases’, ‘lastrevid’, ‘US_congress_bio_ID’, ‘label’, ‘candidacy’, ‘type’]`. We can then merge the preprocessed quotebank data with the speaker data. Since there are around 9 million unique speakers, quotes with speakers that are not in the speakers Wikidata provided are removed in this process. We checked that the quotes removed are a small fraction of all the preprocessed quotes (< 1%).
 
 ### Feature extraction
+`exploring_quotes.ipynb`
 
 With the cleaned data at hand we are now ready to extract from it relevant features. Since we are more interested in the structure of the quotations or the “lexical features” and how it relates to the speaker. We have decided to process the data as follows:
 
