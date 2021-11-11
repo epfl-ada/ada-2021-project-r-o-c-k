@@ -25,6 +25,7 @@ Large compressed files (such as processed Quotebank data) are stored in the Goog
 
 ## Methods
 ### Preprocessing
+#### Quotebank data (`preprocessing_notebook.ipynb`)
 The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the JSON files.
 Since we are interested in the way people speak, we do the following:
  * Remove the following columns ['urls','phase','date','numOccurences']
