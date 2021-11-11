@@ -25,17 +25,24 @@ Large compressed files (such as processed Quotebank data) are stored in the Goog
 
 ## Methods
 ### Preprocessing
-#### Quotebank data (`preprocessing_notebook.ipynb`)
+#### Quotebank data 
+`preprocessing_notebook.ipynb`
 The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the JSON files.
 Since we are interested in the way people speak, we do the following:
- * Remove the following columns ['urls','phase','date','numOccurences']
+ * Remove the following columns `['urls','phase','date','numOccurences']`
  * Remove quotes with no speakers
  * Remove quotes with multiple associated QIDs
   * Multiple QIDs implies that there are two speakers with the same name. Since we cannot know which person spoke the quote without further investigation, we remove these rows.
  * Store the probability of the most likely speaker only
 
 The resulting data is stored as a .bz2 file. The JSON file has the following keys:
-['quoteID','quotation','speaker','prob','qid']
+`['quoteID','quotation','speaker','prob','qid']`
+
+#### Speaker data
+`exploring_quotes.ipynb`
+We also need to extract the information of the speakers. We first read all the parquet files into a dataframe. We check the composition of the data, as shown below:
+
+To reduce the overall of the dataset we need to handle, we remove the speaker information columns that we are not interested in. Thus, we removed the columns `[‘aliases’, ‘lastrevid’, ‘US_congress_bio_ID’, ‘label’, ‘candidacy’, ‘type’]`. We can then merge the preprocessed quotebank data with the speaker data. Since there are around 9 million unique speakers, quotes with speakers that are not in the speakers Wikidata provided are removed in this process. We checked that the quotes removed are a small fraction of all the preprocessed quotes (< 1%).
 
 ### Processing
 
