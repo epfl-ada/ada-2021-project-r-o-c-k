@@ -13,7 +13,8 @@ Given the large number of quotations available and their associated speaker, one
 
 ## Datasets
 * Quotebank data with unique quotes 2015-2020
-* Provided Wikidata data with speaker information
+* Wikidata data with speaker information
+* Wikidata QID labels
 
 ### Data management
 We use Google Collab to load and preprocess the raw Quotebank data because the dataset is very large. 
