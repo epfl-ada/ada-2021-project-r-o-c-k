@@ -45,7 +45,7 @@ The meaning of each column is described below:
 * Comparative_rate: The frequency at which the speaker uses the comparative or superlative as a means of communication
 * Verb_tense: The tense of the verb. Categorical attributes [‘present’, ‘past’, ‘future’]
 
-![alt text](http://url/to/img.png)
+![Screenshot](images/table.png)
 
 Speaker Features: Speaker features are extracted from the Wikidata. The dataframe would include the following keys:
 
@@ -55,8 +55,7 @@ Once the data has been processed according to our needs, we are now ready to exp
 
 The summary of the whole pipeline is summarized in the schematic below:
 
-![alt text](http://url/to/img.png)
-
+![Screenshot](images/Pipeline_ADA.drawio.png)
 
 ## Proposed timeline and Project Organization
 
