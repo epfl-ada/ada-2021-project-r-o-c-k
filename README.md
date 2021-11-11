@@ -17,16 +17,17 @@ Large compressed files (such as processed Quotebank data) are stored in the Goog
 
 ## Methods
 ### Preprocessing
-The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the JSON files.
-Since we are interested in the way people speak, we do the following:
- * Remove the following columns ['urls','phase','date','numOccurences']
+The raw Quotebank data is preprocessed in Google Collab by parsing through each line of the compressed JSON files provided.
+Since we are interested in the way people speak, we use the data with unique quotes and do the following:
+ * Remove the following columns ['urls', 'phase', 'date', 'numOccurences']
  * Remove quotes with no speakers
  * Remove quotes with multiple associated QIDs
-  * Multiple QIDs implies that there are two speakers with the same name. Since we cannot know which person spoke the quote without further investigation, we remove these rows.
- * Store the probability of the most likely speaker only
+     * Multiple QIDs implies that there are two speakers with the same name and since we cannot know which person spoke the quote without further investigation, we remove these rows
+ * Store the probability that the speaker spoke the quote and remove the other entires in ['probas']
 
 The resulting data is stored as a .bz2 file. The JSON file has the following keys:
 ['quoteID','quotation','speaker','prob','qid']
+
 
 ### Processing
 
@@ -45,7 +46,7 @@ The meaning of each column is described below:
 * Comparative_rate: The frequency at which the speaker uses the comparative or superlative as a means of communication
 * Verb_tense: The tense of the verb. Categorical attributes [‘present’, ‘past’, ‘future’]
 
-![alt text](http://url/to/img.png)
+![Screenshot](images/table.png)
 
 Speaker Features: Speaker features are extracted from the Wikidata. The dataframe would include the following keys:
 
@@ -55,8 +56,7 @@ Once the data has been processed according to our needs, we are now ready to exp
 
 The summary of the whole pipeline is summarized in the schematic below:
 
-![alt text](http://url/to/img.png)
-
+![Screenshot](images/Pipeline_ADA.drawio.png)
 
 ## Proposed timeline and Project Organization
 
