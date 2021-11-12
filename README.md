@@ -4,7 +4,7 @@
 
 Don't you ever read an article or a book and just wonder what the writer would look like? With the emergence of big data, relationships between the structure of a text and the writer/speaker's attributes can be extracted.
 
-Given the large number of quotations available and their associated speaker, one could explore the correlation between lexical features in speech and the speaker's attributes. Such an analysis would allow us to understand if their is any relationship between the socio-cultural status of an individual and the structure of his speech. The analysis can also be performed temporarily from 2008 to 2020 and reveal information concerning the evolution of particular trends over time. The analysis would allow us to cluster speakers that share similarities in both "lexical features" and "speaker attributes" and extract patterns. This could potentially help people estimate the attributes of a writer/speaker such as his/her ethnicity, educational background, gender, age ...
+Given the large number of quotations available and their associated speaker, one could explore the correlation between lexical features in speech and the speaker's attributes. Such an analysis would allow us to understand if there is any relationship between the socio-cultural status of an individual and the structure of his speech. The analysis can also be performed temporarily from 2015 to 2020 and reveal information concerning the evolution of particular trends over time. The analysis would allow us to cluster speakers that share similarities in both "lexical features" and "speaker attributes" and extract patterns. This could potentially help people estimate the attributes of a writer/speaker such as his/her ethnicity, educational background, gender, age ...
 
 ## Research questions
 * How does your socio-cultural background affect the way you speak? 
@@ -32,7 +32,7 @@ Since we are interested in the way people speak, we do the following:
  * Remove the following columns `['urls','phase','date','numOccurences']`
  * Remove quotes with no speakers
  * Remove quotes with multiple associated QIDs
-    * Multiple QIDs implies that there are two speakers with the same name. Since we cannot know which person spoke the quote without further investigation, we remove these rows.
+    * Multiple QIDs imply that there are two speakers with the same name. Since we cannot know which person spoke the quote without further investigation, we remove these rows.
  * Store the probability of the most likely speaker only
 
 The resulting data is stored as a .bz2 file. The JSON file has the following keys:
@@ -48,7 +48,7 @@ We also need to extract the information of the speakers. We first read all the p
 ### Feature extraction
 `exploring_quotes.ipynb`
 
-With the cleaned data at hand we are now ready to extract from it relevant features. Since we are more interested in the structure of the quotations or the “lexical features” and how it relates to the speaker. We have decided to process the data as follows:
+With the cleaned data at hand we are now ready to extract relevant features. We have decided to process the data as follows:
 
 Lexical Features: A processed dataframe called lexical would have the following keys:
 
@@ -60,16 +60,16 @@ The meaning of each column is described below:
 * Union_pronouns: The number of occurence of pronouns related to the union of the self and the other (See table below)
 * Other_pronouns: The number of occurence of pronouns related to the other (See table below)
 * Sentiment_rate : The sentiment attached to the quotation. Scalar value in the range [-1,1] where -1 is extremely negative and +1 is extremely positive
-* Comparative_rate: The frequency at which the speaker uses the comparative or superlative as a means of communication
-* Verb_tense: The tense of the verb. Categorical attributes [‘present’, ‘past’, ‘future’]
+* Adjectives: Number of adjectives in the quote
+* Comparative_rate: Rate of regular adjectives in comparison to superlatives and comparatives. Scalar value in the range [-1,1] where -1 means only comparatives and superlatives, 1 only regular adjectives.
 
 ![Screenshot](images/table.png)
 
-Speaker Features: Speaker features are extracted from the Wikidata. The dataframe would include the following keys:
+Speaker Features: Speaker features are extracted from Wikidata. The dataframe would include the following columns:
 
 `[‘quoteID’,  ‘gender’, ‘nationality’, ‘religion’, ‘educational_level’, ‘birth_date’, 'occupation']`
 
-Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the datapoints into a 3D or 2D space. However these features mainly consist of discrete and categorical data, which is not optimal for PCA. We therefore might want to use another method, based on discussion with TA. Patterns can then be extracted using unsupervised clustering techniques which would generate groups of datapoints which share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
+Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the data points into a 3D or 2D space. However, these features mainly consist of discrete and categorical data, which is not optimal for PCA. We therefore might want to use another method, based on discussion with TA. Patterns can then be extracted using unsupervised clustering techniques to generate groups of data points that share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
 
 The summary of the whole pipeline is summarized in the schematic below:
 
@@ -79,15 +79,3 @@ The summary of the whole pipeline is summarized in the schematic below:
 
 In terms of timeline, the different tasks along with their respective deadline are shown below:
 
-* Raw data cleaning and preprocessing: Milestone 2
-* Exploratory data-analysis: Milestone 2
-* Speaker feature generation using Wikidata: Milestone 2
-* Lexical feature generation using NLTK: Milestone 2
-* Feature data manipulation for dimensionality reduction: Milestone 3
-* Dimensionality reduction: Milestone 3
-* Unsupervised clustering: Milestone 3
-* Data analysis: Milestone 3
-
-
-## Questions for TA (optional)
-What method could be useful for our dimensionality reduction? (based on the fact that the features are discrete and/or categorial)
