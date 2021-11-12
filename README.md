@@ -75,7 +75,28 @@ The summary of the whole pipeline is summarized in the schematic below:
 
 ![Screenshot](images/Pipeline_ADA.drawio.png)
 
-## Proposed timeline and Project Organization
-
-In terms of timeline, the different tasks along with their respective deadline are shown below:
-
+## Proposed timeline & Project Organization
+* Week 6
+   * Discussing and selecting topic (all)
+* Week 7
+   * Raw data cleaning and preprocessing (CJ)
+* Week 8
+   * Speaker feature generation using Wikidata (RD)
+   * Lexical feature generation using NLTK (KS, OH)
+   * Exploratory data-analysis (all)
+* **Milestone P2, due 23:59 CET, 12 Nov 2021**
+* Week 9
+   * Feature data manipulation (KS, OH)
+   * Dimensionality reduction (all)
+* Week 10
+   * Clustering data (OH, CJ)
+   * Exploring clusters (KS, RD)
+* Week 11
+   * Begin drafting data story (CJ, RD)
+   * Data anlysis (all)
+* Week 12
+   * Data anlysis (OH, RD)
+   * Data visualization (CJ, KS)
+* Week 13
+   * Final analysis and completion of data story (all)
+* **Milestone P3, due 23:59 CET, 17 Dec 2021**
