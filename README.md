@@ -48,20 +48,20 @@ We also need to extract the information of the speakers. We first read all the p
 ### Feature extraction
 `exploring_quotes.ipynb`
 
-With the cleaned data at hand we are now ready to extract relevant features. We have decided to process the data as follows:
+After all preprocessing, the relevant features can be extracted as follows:
 
 Lexical Features: A processed dataframe called lexical would have the following keys:
 
 `[‘quoteID’,  ‘self_pronouns’, ‘union_pronouns’, ‘other_pronouns’, ‘sentiment_rate’, ‘comparative_rate’, ‘verb_tense’]`
 
-The meaning of each column is described below:
+Each column is described below:
 * QuoteID : The identification number of the quotation
-* self_pronouns: The number of occurence of pronouns related to the self (See table below)
-* Union_pronouns: The number of occurence of pronouns related to the union of the self and the other (See table below)
-* Other_pronouns: The number of occurence of pronouns related to the other (See table below)
+* self_pronouns: The number of pronouns related to the self (See table below)
+* Union_pronouns: The number of pronouns related to the union of the self and the other (See table below)
+* Other_pronouns: The number of pronouns related to the other (See table below)
 * Sentiment_rate : The sentiment attached to the quotation. Scalar value in the range [-1,1] where -1 is extremely negative and +1 is extremely positive
-* Adjectives: Number of adjectives in the quote
-* Comparative_rate: Rate of regular adjectives in comparison to superlatives and comparatives. Scalar value in the range [-1,1] where -1 means only comparatives and superlatives, 1 only regular adjectives.
+* Adjectives: Number of adjectives 
+* Comparative_rate: Rate of regular adjectives in comparison to superlatives and comparatives. Scalar value in [-1,1] where -1 means only comparatives/superlatives, 1 only regular adjectives.
 
 ![Screenshot](images/table.png)
 
@@ -100,3 +100,7 @@ The summary of the whole pipeline is summarized in the schematic below:
 * Week 13
    * Final analysis and completion of data story (all)
 * **Milestone P3, due 23:59 CET, 17 Dec 2021**
+
+## Questions for TA 
+What method could be useful for our dimensionality reduction? 
+
