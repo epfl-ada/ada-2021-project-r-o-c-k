@@ -69,7 +69,7 @@ Speaker Features: Speaker features are extracted from the Wikidata. The datafram
 
 `[‘quoteID’,  ‘gender’, ‘nationality’, ‘religion’, ‘educational_level’, ‘birth_date’]`
 
-Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the datapoints into a 3D or 2D space.  Patterns can then be extracted using unsupervised clustering techniques which would generate groups of datapoints which share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
+Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the datapoints into a 3D or 2D space. However these features mainly consist of discrete and categorical data, which is not optimal for PCA. We therefore might want to use another method, based on discussion with TA. Patterns can then be extracted using unsupervised clustering techniques which would generate groups of datapoints which share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
 
 The summary of the whole pipeline is summarized in the schematic below:
 
@@ -90,3 +90,4 @@ In terms of timeline, the different tasks along with their respective deadline a
 
 
 ## Questions for TA (optional)
+What method could be useful for our dimensionality reduction? (based on the fact that the features are discrete and/or categorial)
