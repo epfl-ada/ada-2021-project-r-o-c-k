@@ -85,20 +85,25 @@ The summary of the whole pipeline is summarized in the schematic below:
    * Lexical feature generation using NLTK (KS, OH)
    * Exploratory data-analysis (all)
 * **Milestone P2, due 23:59 CET, 12 Nov 2021**
-* Week 9
-   * Feature data manipulation (KS, OH)
-   * Dimensionality reduction (all)
-* Week 10
-   * Clustering data (OH, CJ)
-   * Exploring clusters (KS, RD)
+* Week 9 & Week 10
+   * HW2
 * Week 11
-   * Begin drafting data story (CJ, RD)
-   * Data anlysis (all)
+   * Minor corrections of M2 (CJ)
+   * Speaker data cleaning (KS)
+   * Add more features - see M2 feedback (OH)
+   * Feature selection (CJ)
+   * Final feature analysis and visualization (RD)
+   * Dimensionality reduction with PCA, UMAP, TSNE (CJ, OH)
+   * Clustering exploration (KS, RD)
 * Week 12
-   * Data anlysis (OH, RD)
-   * Data visualization (CJ, KS)
+   * Begin making website (OH)
+   * Clustering (KS, RD)
+   * Data analysis (all)
+   * Begin data visualization (all)
+   * Begin writing data story (CJ)
 * Week 13
-   * Final analysis and completion of data story (all)
+   * Final data visualization (all)
+   * Completion of data story (all)
 * **Milestone P3, due 23:59 CET, 17 Dec 2021**
 
 ## Questions for TA 
