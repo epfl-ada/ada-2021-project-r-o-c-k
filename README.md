@@ -2,13 +2,12 @@
 
 ## Abstract
 
-Don't you ever read an article or a book and just wonder what the writer would look like? With the emergence of big data, relationships between the structure of a text and the writer/speaker's attributes can be extracted.
+Have you ever read an article or a book and wondered what the writer is like? With the emergence of big data, relationships between the structure of a text and the writer/speaker's attributes can be extracted.
 
-Given the large number of quotations available and their associated speaker, one could explore the correlation between lexical features in speech and the speaker's attributes. Such an analysis would allow us to understand if there is any relationship between the socio-cultural status of an individual and the structure of his speech. The analysis can also be performed temporarily from 2015 to 2020 and reveal information concerning the evolution of particular trends over time. The analysis would allow us to cluster speakers that share similarities in both "lexical features" and "speaker attributes" and extract patterns. This could potentially help people estimate the attributes of a writer/speaker such as his/her ethnicity, educational background, gender, age ...
+Given the large number of quotations available and their associated speaker, one could explore the correlation between lexical features in speech and the speaker's attributes. Such an analysis would allow us to understand if there is any relationship between the socio-cultural status of an individual and the structure of his speech. The analysis can also be performed temporarily from 2015 to 2020 and reveal information concerning the evolution of particular trends over time. The analysis would allow us to cluster speakers that share similarities in both "lexical features" and "speaker attributes" and extract patterns. This could potentially help people estimate the attributes of a writer/speaker such as his/her ethnicity, educational background, gender, and age.
 
 ## Research questions
-* How does your socio-cultural background affect the way you speak? 
-* Does your nationality, gender, educational background or religion condemn you to talk in a specific way? 
+* How does your socio-cultural background, such as nationality, gender, or religion, affect the way you speak? 
 * If so, can an algorithm predict who you are given a set of words you uttered?
 
 ## Datasets
