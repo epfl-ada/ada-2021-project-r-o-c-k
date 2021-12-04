@@ -1,1 +1,6 @@
 quotes-2019-nytimes.json
+data/
+generated/
+.gitignore
+.DS_Store
+__pycache__
