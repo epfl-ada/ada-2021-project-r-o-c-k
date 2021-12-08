@@ -58,3 +58,31 @@ adj_tag_dict = {
     'JJR': 'comparative',
     'JJS': 'superlative'
 }
+
+dtypes ={'quoteID': str,
+      'qid': str,
+       'sentence_count':int, 
+       '._per_sentence':float, 
+       ',_per_sentence':float, 
+       '!_per_sentence':float,
+       '?_per_sentence':float, 
+       ':_per_sentence':float, 
+       ';_per_sentence':float, 
+       'sign_per_token':float,
+       'punctuation_per_sentence':float, 
+       'approx_word_count': int, 
+       'token_count': int,
+       'adj_per_word':float, 
+       'ordinal_ratio':float, 
+       'comparative_ratio':float,
+       'superlative_ratio':float, 
+       'verb_per_word':float, 
+       'base_ratio':float, 
+       'pres_ratio':float,
+       'past_ratio':float, 
+       'pronoun_per_word':float, 
+       'self_ratio':float, 
+       'union_ratio':float,
+       'other_ratio':float, 
+       'sentiment':float
+        }
