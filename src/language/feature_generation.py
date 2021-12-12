@@ -25,13 +25,23 @@ def add_morphological_cols(row):
     '''
     Adds the following columns to each row:
 
-    self: count of pronouns referring to the speaker (ex: me, I)
-    union: count of pronouns referring to the speaker and its group (ex: we, our)
-    other: count of pronouns referring to someone else than the speaker (ex: he, their)
-    adj_ratio: ratio of regular adjectives in comparison to superlatives and comparatives
-    {x}_count: count of x in the quote, for x in {adj, ., ,, !, ?, token, punctuation}
-
-    -1 means only comparatives and superlatives, 1 only regular adjectives
+    Adds the following features to the dataframe:
+    
+    {sign}_per_sentence: count of sign per sentence, for sign in {'.', ',', '!', '?', ':', ';', 'puncutation'}
+    {x}_count: count of x in the quote, for x in {sentence, token, approx_word (amount of words approximated by  #tokens - #signs)}
+    {sub_category}_ratio: ratio of subcategory of category and category in the range [-1,1] for sub_category in 
+    {
+    'ordinal', 'comparative', 'superlative',  (adjectives)
+    'base', 'pres', 'past', (verbs)
+    'self', 'union', 'other' (pronouns, self if it refers to the speaker (ex: I, my), 
+    union for speaker and its group (ex: we, our), union if to someone else than the speaker (ex: he, their))
+    } 
+    -1 means that there are only occurrences of words belonging to the other subcategories,
+    0 that the occurrences of words in the specified subcategory make up half of the occurrences of the grammar category
+    or that there are no occurences of words of the grammar category.
+    1 that all occurences of the grammar category belong to the specified subcategory
+    sign_per_token: number of signs per token
+    
     :param row: dataframe row to add columns to
     :return: row with specified columns added
     '''
@@ -117,15 +127,20 @@ def add_features_to_df(df):
     '''
     Adds the following features to the dataframe:
     
-    self_count: count of pronouns referring to the speaker (ex: I, my)
-    union_count: count of pronouns referring to the speaker and its group (ex: we, our)
-    other_count: count of pronouns referring to someone else than the speaker (ex: he, her)
+    {sign}_per_sentence: count of sign per sentence, for sign in {'.', ',', '!', '?', ':', ';', 'puncutation'}
     {x}_count: count of x in the quote, for x in {sentence, token, approx_word (amount of words approximated by  #tokens - #signs)}
-    {x}_ratio: ratio of subcategory of grammar category and grammar category in the range [-1,1] for x in {self, union, other}
+    {sub_category}_ratio: ratio of subcategory of category and category in the range [-1,1] for sub_category in 
+    {
+    'ordinal', 'comparative', 'superlative',  (adjectives)
+    'base', 'pres', 'past', (verbs)
+    'self', 'union', 'other' (pronouns, self if it refers to the speaker (ex: I, my), 
+    union for speaker and its group (ex: we, our), union if to someone else than the speaker (ex: he, their))
+    } 
     -1 means that there are only occurrences of words belonging to the other subcategories,
     0 that the occurrences of words in the specified subcategory make up half of the occurrences of the grammar category
     or that there are no occurences of words of the grammar category.
     1 that all occurences of the grammar category belong to the specified subcategory
+    sign_per_token: number of signs per token
     sentiment: based on NLTK's polarity score, -1 one means 100 % negative, 1 100 % positive
     
     :param row: dataframe row to add columns to
