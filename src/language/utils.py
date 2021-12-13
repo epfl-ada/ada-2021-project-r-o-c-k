@@ -1,6 +1,6 @@
 '''
 File name: utils.py
-Author: Oskar 
+Author: Oskar, Karim 
 Date created: 13/12/2021
 Date last modified: 13/12/2021
 Python Version: 3.8
