@@ -116,3 +116,50 @@ def get_balanced_sample(target, target_dict, sample_size=50):
                 print("Chunk: " + str(i), df_new.shape)
     
     return df_new
+
+
+gender_dict = {
+    'Male': 0,
+    'Female': 1
+}
+
+religion_dict = {
+    'Christian': 0,
+    'Hindus': 1, 
+    'Muslim': 2, 
+    'Jewish': 3
+}
+
+degree_dict = {
+    'Bachelor': 0, 
+    'Master': 1,
+    'Doctorate': 2
+}
+
+occupation_dict = {
+    'Politics': 0, 
+    'Arts': 1, 
+    'Military': 2, 
+    'Sciences': 3, 
+    'Business': 4,
+    'Sports': 5, 
+    'Religion': 6,
+    'Other': 7
+}
+
+continent_dict = {
+    'NA': 0, 
+    'AS': 1, 
+    'EU': 2, 
+    'OC': 3, 
+    'SA':4, 
+    'AF':5
+}
+
+generation_dict = {
+    '70s': 0, 
+    '50s': 1, 
+    '30s': 2, 
+    '90s': 3, 
+    '00s': 4
+}
