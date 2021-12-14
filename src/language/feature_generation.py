@@ -6,6 +6,7 @@ Date last modified: 04/12/2021
 Python Version: 3.8
 '''
 import nltk
+import mapply
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from grammar_mappings import pronoun_dict, verb_tag_dict, adj_tag_dict
 
@@ -23,8 +24,6 @@ def add_sentiment_cols(row):
 
 def add_morphological_cols(row):
     '''
-    Adds the following columns to each row:
-
     Adds the following features to the dataframe:
     
     {sign}_per_sentence: count of sign per sentence, for sign in {'.', ',', '!', '?', ':', ';', 'puncutation'}
@@ -150,9 +149,10 @@ def add_features_to_df(df):
     '''
     new_df = df.copy()
 
-    new_df = new_df.apply(add_morphological_cols, axis = 1)
-    new_df = new_df.apply(add_sentiment_cols, axis = 1)
+    new_df = new_df.mapply(add_morphological_cols, axis = 1)
+    new_df = new_df.mapply(add_sentiment_cols, axis = 1)
 
     return new_df
 
 sid = SentimentIntensityAnalyzer()
+mapply.init(n_workers=-1)
