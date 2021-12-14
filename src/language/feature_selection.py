@@ -83,6 +83,15 @@ def select_predictors(df, ft_language, target):
 
 
 def get_balanced_sample(target, target_dict, sample_size=50):
+    '''
+    Get a balanced data sample from the data of all years
+    
+    param target: target speaker feature to balance
+    param target_dict: dictionary of the speaker feature
+    param sample_size: number of values to sample per chunk
+    
+    return df_new: the new dataframe with balanced classes
+    '''
     # file location
     years = ['2015', '2016', '2017', '2018', '2019', '2020']
     generate_path = './../../data/merged_data/'
@@ -103,7 +112,7 @@ def get_balanced_sample(target, target_dict, sample_size=50):
             # check for smallest sample
             for key in target_dict.keys():
                 sample = chunk.loc[chunk[target] == key]
-                if sample.shape[0] < sample_size:
+                if sample.shape[0] < size:
                     size = sample.shape[0]
 
             # add sample to df
@@ -117,6 +126,8 @@ def get_balanced_sample(target, target_dict, sample_size=50):
     
     return df_new
 
+
+# Dictionaries used during regression model training
 
 gender_dict = {
     'Male': 0,
