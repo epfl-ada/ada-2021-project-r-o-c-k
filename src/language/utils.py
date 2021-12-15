@@ -17,7 +17,7 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn import datasets, cluster
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.tree import DecisionTreeRegressor
-import mappings
+from mappings import *
 
 
 def group_nation_by_continent(df):
@@ -65,7 +65,9 @@ def plot_speaker_attr_within_clusters(df_attributes, attributes, n_clusters):
     '''
     n_speaker_feats = len(attributes)
     fig, axes = plt.subplots(n_speaker_feats, n_clusters, figsize = (n_clusters * 3, n_speaker_feats * 2), sharey = False)
-
+    
+    palettes = [palette_generation, palette_continent, palette_gender, palette_occupation, palette_degree, palette_religion]
+    
     for speaker_feat_idx, speaker_feat in enumerate(attributes):
         clusters_curr_feat = df_attributes.groupby(['cluster', speaker_feat]).size().reset_index(level=[0,1])
 
@@ -73,8 +75,6 @@ def plot_speaker_attr_within_clusters(df_attributes, attributes, n_clusters):
             use_sns = False
         else:
             use_sns = True
-            # map each label of the speaker attribute to a certain colour
-            palette = dict(zip(clusters_curr_feat[speaker_feat].unique(), sns.color_palette()))
             
         for cluster_i in range(n_clusters):
             axis = axes[speaker_feat_idx, cluster_i]
@@ -83,7 +83,7 @@ def plot_speaker_attr_within_clusters(df_attributes, attributes, n_clusters):
             labels = cluster[speaker_feat]
             if not values.isnull().all():
                 if use_sns:
-                    sns.barplot(x = labels, y = values, ax = axis, palette = palette)
+                    sns.barplot(x = labels, y = values, ax = axis, palette = palettes[speaker_feat_idx])
                     axis.set_xticklabels(labels, rotation = 45, fontsize = 10)
                 else:
                     axis.bar(labels, values)
