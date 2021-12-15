@@ -17,6 +17,8 @@ from sklearn.feature_selection import SelectFromModel
 from sklearn import datasets, cluster
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.tree import DecisionTreeRegressor
+import mappings
+
 
 def group_nation_by_continent(df):
     '''
@@ -331,6 +333,11 @@ def train_GBR_model(X, y):
 
 
 def explained_variance(ipca):
+    '''
+    Check how many principle components results in 80% of the variance
+    
+    param ipca: incremental PCA
+    '''
     k = 0.0
     weight = ipca.explained_variance_ratio_*100
     print('Explained variances: {}'.format(weight*100))
@@ -341,3 +348,101 @@ def explained_variance(ipca):
             idx = i
 
     print(f'\nTo explain {round(k,2)} % of the variance we need the first {idx+1} principal components')
+    
+    
+def setProperties():
+    '''
+    Set color properties for plots
+    '''
+#     custom_palette = sns.set_palette(sns.color_palette(mappings.colors))
+    
+    norm = matplotlib.colors.Normalize(-1,1)
+    colors = [[norm(-1.0), "#234473"],
+              [norm( 1.0), "#AD2646"]]
+
+    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", colors)
+    matplotlib.rcParams['font.family'] = "monospace"
+    matplotlib.rcParams['font.weight'] = "semibold"
+    
+    
+def test_significance(df, lexical_features, speaker_features, tresh=0.05, verbose=False):
+    '''
+    Get significances between features
+    
+    param df: dataframe
+    param lexical_features: lexical features
+    param speaker_features: speaker features
+    param tresh:  p-value threshold
+    param verbose: whether to print values
+    
+    return Grid_median: median significance values
+    return Grid_max: max significance values
+    return Significant_list: list of significant values
+    return Significant_p: list of p-values
+    '''
+    Grid_max = np.zeros(shape=(len(lexical_features),len(speaker_features)))
+    Grid_median = np.zeros(shape=(len(lexical_features),len(speaker_features)))
+    Significant_list = []
+    Significant_p =[]
+    for idx_i,i in enumerate(speaker_features):                                      #Iterate over
+        for idx_j,j in enumerate(lexical_features):                                  #Iterate over
+            unique = df[i].unique()                  #Iterate over the different attributes
+            unique = unique[unique != np.array(None)]
+            unique = np.array(unique, dtype=str)
+            unique = unique[unique != 'nan']
+            unique = unique[unique != 'Other']
+            pairs = list(itertools.combinations(unique,2))
+            min_p = 1
+            res = []
+            for idx,k in enumerate(pairs):
+                try:
+                    N, p = mannwhitneyu(df[df[i]==k[0]][j], df[df[i]==k[1]][j])
+                    Significant_list.append([k[0],k[1],j,i])
+                    Significant_p.append(p)
+                    if p < min_p:
+                        min_p = p
+                        min_x = k[0]
+                        min_y = k[1]
+                        param = j
+                        speak = i
+                        
+                        if min_p == 0:
+                            Grid_max[idx_j,idx_i] = 1E-50
+                        else:    
+                            Grid_max[idx_j,idx_i] = 1/min_p
+                    res.append(p)   
+                except:
+                    print('Test failed for {},{}'.format(i,j))
+           
+            Grid_median[idx_j,idx_i] = 1/median(res)
+            
+            if verbose:
+                print('The maximum statistically significant difference with {} in {} is between {} and {}'.format(j,i,k[0],k[1]))
+                print('The p-value is {}'.format(min_p))
+                  
+    indices, Significant_p = zip(*sorted(enumerate(Significant_p), key=itemgetter(1))) #Sort the scores
+    Significant_list = [Significant_list[i] for i in indices]
+    
+    return Grid_median, Grid_max, Significant_list, Significant_p
+
+
+def plot_distribution(sample, lexical, speaker, binwidth, include_only=[]):
+    if include_only is None:
+        ax = sns.kdeplot(x=lexical,hue=speaker,common_norm=False, data=sample, cut=0)
+    else:
+        tmp = sample[sample[speaker].isin(include_only)]
+        ax = sns.kdeplot(x=lexical,hue=speaker,common_norm=False, data=tmp, cut=0)
+    ax.yaxis.set_major_formatter(PercentFormatter(1/binwidth))
+    plt.ylabel("Probability", fontweight='semibold')
+    plt.xlabel(ax.get_xlabel(), fontweight='semibold')
+    plt.show()
+    ax.get_figure().savefig("Distribution_{}_with_{}_and_{}.png".format(speaker,include_only[0], include_only[1]),dpi=300,bbox_inches="tight")
+    
+    
+def get_most_significant(Significant_list,Significant_p,rank):
+    return Significant_list[:rank], Significant_p[:rank]
+
+
+def get_least_significant(Significant_list,Significant_p,rank):
+    return Significant_list[-rank:], Significant_p[-rank:]
+
