@@ -119,11 +119,7 @@ The summary of the original pipeline is summarized in the schematic below:
    * Cleaning of notebooks, ReadME, files (CJ)
    * Final data visualization (all)
    * Completion of data story (all)
-   * Completion of website (OH, KS)
-  
-   
+   * Completion of website (OH)
 * **Milestone P3, due 23:59 CET, 17 Dec 2021**
 
-## Questions for TA 
-What method could be useful for our dimensionality reduction? 
 
