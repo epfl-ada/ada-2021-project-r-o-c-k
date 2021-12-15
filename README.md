@@ -76,7 +76,7 @@ We perform simple statistical anlysis on our data to understand it better. Boxpl
 
 
 ### Pattern extraction
-`feature_exploration.ipynb`, `utils.py`, `mappings.py`
+`pca_clustering.ipynb`, `utils.py`, `mappings.py`
 
 Pattern extraction is done through feature selection, dimensionality reduction, and clustering. We use a tree-based feature selection method to reduce the number of lexical features used. Keeping the lexical features most relvant to the speaker features, we perform PCA and t-SNE to further reduce the dimension of our dataset. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. Patterns can then be extracted using unsupervised clustering techniques to generate groups of data points that share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
 
