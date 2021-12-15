@@ -10,6 +10,8 @@ import pandas as pd
 import seaborn as sns
 import pycountry_convert as pc
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
+import matplotlib.colors
 from sklearn.metrics import silhouette_score
 from sklearn import cluster as skc
 from sklearn.ensemble import ExtraTreesClassifier
@@ -18,7 +20,10 @@ from sklearn import datasets, cluster
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.tree import DecisionTreeRegressor
 from mappings import *
-
+import itertools
+from scipy.stats import mannwhitneyu
+from statistics import median
+from operator import itemgetter
 
 def group_nation_by_continent(df):
     '''
@@ -364,6 +369,8 @@ def setProperties():
     matplotlib.rcParams['font.family'] = "monospace"
     matplotlib.rcParams['font.weight'] = "semibold"
     
+    return cmap
+    
     
 def test_significance(df, lexical_features, speaker_features, tresh=0.05, verbose=False):
     '''
@@ -407,7 +414,7 @@ def test_significance(df, lexical_features, speaker_features, tresh=0.05, verbos
                         speak = i
                         
                         if min_p == 0:
-                            Grid_max[idx_j,idx_i] = 1E-50
+                            Grid_max[idx_j,idx_i] = 1/1E-200
                         else:    
                             Grid_max[idx_j,idx_i] = 1/min_p
                     res.append(p)   
@@ -427,6 +434,15 @@ def test_significance(df, lexical_features, speaker_features, tresh=0.05, verbos
 
 
 def plot_distribution(sample, lexical, speaker, binwidth, include_only=[]):
+    '''
+    To plot distributions between lexical and speaker attributes
+    
+    param sample: input dataframe
+    param lexical: which lexical feature to plot (only 1)
+    param speaker: which speaker attribute to plot (only 1)
+    param binwidth: histogram bin width
+    param include_only: which classes within the speaker attribute to include
+    '''
     if include_only is None:
         ax = sns.kdeplot(x=lexical,hue=speaker,common_norm=False, data=sample, cut=0)
     else:
@@ -440,9 +456,25 @@ def plot_distribution(sample, lexical, speaker, binwidth, include_only=[]):
     
     
 def get_most_significant(Significant_list,Significant_p,rank):
+    '''
+    Get most significant lexical and speaker attribute pairs
+    
+    param significant_list: list of significance
+    param significant_p: list of p values
+    param rank: number of pairs to output, ranked by most significant first
+    return: significant_list and significant_p of the first rank pairing
+    '''
     return Significant_list[:rank], Significant_p[:rank]
 
 
 def get_least_significant(Significant_list,Significant_p,rank):
+        '''
+    Get most significant lexical and speaker attribute pairs
+    
+    param significant_list: list of significance
+    param significant_p: list of p values
+    param rank: number of pairs to output, ranked by least significant first
+    return: significant_list and significant_p of the first rank pairing
+    '''
     return Significant_list[-rank:], Significant_p[-rank:]
 
