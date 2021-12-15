@@ -53,15 +53,21 @@ Lexical Features: A processed dataframe called lexical would have the following 
 
 `[‘quoteID’,  ‘self_pronouns’, ‘union_pronouns’, ‘other_pronouns’, ‘sentiment_rate’, ‘comparative_rate’, ‘verb_tense’]`
 
-Each column is described below:
-* QuoteID : The identification number of the quotation
-* self_pronouns: The number of pronouns related to the self (See table below)
-* Union_pronouns: The number of pronouns related to the union of the self and the other (See table below)
-* Other_pronouns: The number of pronouns related to the other (See table below)
-* Sentiment_rate : The sentiment attached to the quotation. Scalar value in the range [-1,1] where -1 is extremely negative and +1 is extremely positive
-* Adjectives: Number of adjectives 
-* Comparative_rate: Rate of regular adjectives in comparison to superlatives and comparatives. Scalar value in [-1,1] where -1 means only comparatives/superlatives, 1 only regular adjectives.
+Each lexical column is described below:
+* {x}_per_sentence: count of x per sentence, for x in {'.', ',', '!', '?', ':', ';', 'puncutation'}
+* {x}_count: count of x in the quote, for x in {sentence, token, approx_word (amount of words approximated by  #tokens - #signs)}
+* {sub_category}_ratio: ratio of subcategory for sub_category in 
+    {
+    'ordinal', 'comparative', 'superlative',  (adjectives)
+    'base', 'pres', 'past', (verbs)
+    'self', 'union', 'other' (pronouns, self if it refers to the speaker (ex: I, my), 
+    union for speaker and its group (ex: we, our), union if to someone else than the speaker (ex: he, their))
+    } 
+    the ratio explains the relation between occurrences of the specific subcategory (for example base) and its parent category (for example verbs). The ratio takes values in the range [-1,1]: -1 means that there are only occurrences of words belonging to the other subcategories. 0 means that the occurrences of words in the specified subcategory make up half of the occurrences of the parent category, or that there are no occurrences of words of the parental category. 1 means that all occurrences of the parental category belong to the specified subcategory.
+* punctuation_per_token: number of punctuations per token (previously called punctuations
+* sentiment: based on NLTK's polarity score, -1 one means 100 % negative, 1 100 % positive
 
+In the following figure contains the subcategories of pronouns.
 ![Screenshot](images/table.png)
 
 Speaker Features: Speaker features are extracted from Wikidata. The dataframe includes the following columns:
