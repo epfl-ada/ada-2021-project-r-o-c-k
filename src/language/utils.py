@@ -19,6 +19,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.tree import DecisionTreeRegressor
 import mappings
 
+
 def group_nation_by_continent(df):
     '''
     Replaces nation in column of nationalities by continent
