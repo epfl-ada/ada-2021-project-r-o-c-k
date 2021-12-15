@@ -45,7 +45,7 @@ We checked that Quotebank identified a speaker for 65-66% of its quotes. After r
 We also need to extract the information of the speakers. We first read all the parquet files into a dataframe. To reduce the overall of the dataset we need to handle, we remove the speaker information columns that we are not interested in. Thus, we removed the columns `[‘aliases’, ‘lastrevid’, ‘US_congress_bio_ID’, ‘label’, ‘candidacy’, ‘type’]`. We can then merge the preprocessed quotebank data with the speaker data. Since there are around 9 million unique speakers, quotes with speakers that are not in the speakers Wikidata provided are removed in this process. We checked that the quotes removed are a small fraction of all the preprocessed quotes (< 1%).
 
 ### Feature extraction
-`feature_extraction.ipynb`
+`feature_generation.ipynb`, `feature_generation.py`
 
 After all preprocessing, the relevant features can be extracted as follows:
 
@@ -64,13 +64,29 @@ Each column is described below:
 
 ![Screenshot](images/table.png)
 
-Speaker Features: Speaker features are extracted from Wikidata. The dataframe would include the following columns:
+Speaker Features: Speaker features are extracted from Wikidata. The dataframe includes the following columns:
 
 `[‘quoteID’,  ‘gender’, ‘nationality’, ‘religion’, ‘educational_level’, ‘birth_date’, 'occupation']`
 
-Once the data has been processed according to our needs, we are now ready to explore and extract patterns. To do so, a dimensionality reduction framework will be used as a first step. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. One possible method could be a PCA which takes the aggregated features ‘lexical_feature’ and ‘speaker_feature’ and projects the data points into a 3D or 2D space. However, these features mainly consist of discrete and categorical data, which is not optimal for PCA. We therefore might want to use another method, based on discussion with TA. Patterns can then be extracted using unsupervised clustering techniques to generate groups of data points that share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
 
-The summary of the whole pipeline is summarized in the schematic below:
+### Statistical analysis
+`feature_exploration.ipynb`, `utils.py`, `mappings.py`
+
+We perform simple statistical anlysis on our data to understand it better. Boxplots are made to investigate the mean, median, and outliers of different lexical and speaker features. We also perform the Mann-Whitney U-test to assess the statistical significance of lexical versus speaker features.
+
+
+### Pattern extraction
+`feature_exploration.ipynb`, `utils.py`, `mappings.py`
+
+Pattern extraction is done through feature selection, dimensionality reduction, and clustering. We use a tree-based feature selection method to reduce the number of lexical features used. Keeping the lexical features most relvant to the speaker features, we perform PCA and t-SNE to further reduce the dimension of our dataset. Projecting into a lower dimensional space would allow us to observe and extract patterns more easily. Patterns can then be extracted using unsupervised clustering techniques to generate groups of data points that share similar features. The analysis of these clusters would allow us to make conclusions concerning the correlation between a speaker and the lexical content used. The analysis would make use of all the different tools learned in the ADA course.
+
+
+### Modelling
+`feature_exploration.ipynb`, `utils.py`, `mappings.py`
+
+We also tried to train a Gradient Boosting Regressor to predict individual speaker features using the lexical features. We tried this using features suggested by the tree-based feature selection and the features we found to be statistically significant.
+
+The summary of the original pipeline is summarized in the schematic below:
 
 ![Screenshot](images/Pipeline_ADA.drawio.png)
 
@@ -88,21 +104,24 @@ The summary of the whole pipeline is summarized in the schematic below:
    * HW2
 * Week 11
    * Minor corrections of M2 (CJ)
-   * Speaker data cleaning (KS)
+   * Speaker data cleaning (KS, RD)
    * Add more features - see M2 feedback (OH)
-   * Feature selection (CJ)
-   * Final feature analysis and visualization (RD)
-   * Dimensionality reduction with PCA, UMAP, TSNE (CJ, OH)
-   * Clustering exploration (KS, RD)
+   * Feature selection and data merging (CJ)
+   * Dimensionality reduction with PCA, TSNE (CJ, OH)
 * Week 12
    * Begin making website (OH)
-   * Clustering (KS, RD)
-   * Data analysis (all)
+   * Clustering (OH)
+   * Model training (CJ)
+   * Statistical analysis (KS, RD)
    * Begin data visualization (all)
-   * Begin writing data story (CJ)
 * Week 13
+   * Data analysis (RD, KS)
+   * Cleaning of notebooks, ReadME, files (CJ)
    * Final data visualization (all)
    * Completion of data story (all)
+   * Completion of website (OH, KS)
+  
+   
 * **Milestone P3, due 23:59 CET, 17 Dec 2021**
 
 ## Questions for TA 
