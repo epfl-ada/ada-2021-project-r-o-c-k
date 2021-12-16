@@ -69,6 +69,8 @@ Each lexical column is described below:
 * punctuation_per_token: number of punctuations per token (previously called punctuations
 * sentiment: based on NLTK's polarity score, -1 one means 100 % negative, 1 100 % positive
 
+We don't include modal auxiliaries when counting the verbs. The ratios for adjectives are, due to our pos-tagging on single words, are only identifying single word comparative adjectives and superlatives. Whenever a adjective is constructed with a more or most in front of it, it is still counted as an ordinal adjective. That is why we do not include these ratios in our further analysis.
+
 The following figure contains examples of the subcategories of pronouns.
 
 ![Screenshot](images/table.png)
