@@ -69,7 +69,8 @@ Each lexical column is described below:
 * punctuation_per_token: number of punctuations per token (previously called punctuations
 * sentiment: based on NLTK's polarity score, -1 one means 100 % negative, 1 100 % positive
 
-In the following figure contains the subcategories of pronouns.
+The following figure contains examples of the subcategories of pronouns.
+
 ![Screenshot](images/table.png)
 
 Speaker Features: Speaker features are extracted from Wikidata. The dataframe includes the following columns:
