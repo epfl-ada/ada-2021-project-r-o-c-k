@@ -46,6 +46,10 @@ We checked that Quotebank identified a speaker for 65-66% of its quotes. After r
 
 We also need to extract the information of the speakers. We first read all the parquet files into a dataframe. To reduce the overall of the dataset we need to handle, we remove the speaker information columns that we are not interested in. Thus, we removed the columns `[‘aliases’, ‘lastrevid’, ‘US_congress_bio_ID’, ‘label’, ‘candidacy’, ‘type’]`. We can then merge the preprocessed quotebank data with the speaker data. Since there are around 9 million unique speakers, quotes with speakers that are not in the speakers Wikidata provided are removed in this process. We checked that the quotes removed are a small fraction of all the preprocessed quotes (< 1%).
 
+Speaker Features: A processed dataframe called speaker would have the following keys:
+
+`[‘quoteID’,  ‘date_of_birth’, ‘nationality’, ‘gender’, ‘religion’, ‘academic_degree’, ‘occupation’]`
+
 ### Feature extraction
 `feature_generation.ipynb`, `feature_generation.py`
 
